@@ -22,8 +22,10 @@ ViewerInterface::ViewerInterface()
 
 
     ///  TODO - Connexion à compléter...
-
-
+    //Mise en place de la connexion pour le bouton about
+    connect( aboutButton,         SIGNAL(pressed(void)), viewer, SLOT(about()) );
+    //Mise en place de la connexion pour le bouton quit
+    connect( quitButton,         SIGNAL(pressed(void)), viewer, SLOT(closeEvent(this)) );
 
 
 
