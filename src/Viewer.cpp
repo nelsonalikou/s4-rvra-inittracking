@@ -9,6 +9,9 @@
 #include <iostream>
 
 #include <QTabWidget>
+#include <QTimer>
+#include <QFont>
+#include <QDebug>
 
 #define DEFAULTREADINGPORT 5000
 
@@ -46,6 +49,7 @@ void Viewer::closeEvent(QCloseEvent *event)
     gluDeleteQuadric( ToolsMarker::quad );
 
     //// TODO - Ménage
+    //Fermeture de la fenetre help
     this->helpWidget()->close();
 }
 
@@ -54,9 +58,8 @@ void Viewer::closeEvent(QCloseEvent *event)
 ////         qu'aucune erreur n'ai eu lieu.
 int Viewer::doBindTracker()
 {
-
-
-    return 1;
+    //en cas d'échec return 0
+    return (m_tracker.valid()) ? 1 : 0;
 }
 
 
@@ -65,12 +68,20 @@ int Viewer::doBindTracker()
 ////        et connection à la méthode à exécuter lors de son déclenchement
 void Viewer::setTrackingConnect()
 {
+    //initialisation du timer à 0
+    m_trackingTimer.start(0);
+    //Mise en place de la connexion pour le déclenchement du timer
+    connect( &m_trackingTimer, SIGNAL(timeout()), this, SLOT(readARTData()) );
+
 }
 
 
 //// TODO - Lecture des données émises par le système de tracking
 void Viewer::readARTData()
 {
+    if(!m_tracker.receive()){
+        qDebug() << "readARTData() : no data found";
+    }
 }
 
 
@@ -273,6 +284,15 @@ void Viewer::init() {
 //// TODO - écriture des informations textes
 void Viewer::drawInfo       ()
 {
+    //création de la Arial à la taille 12
+    QFont font("Arial", 12);
+    //Dessin du numéro du paquet UDP à la position (10,30) avec la police font
+    this->drawText(10,30,QString("Num paquet UDP %1").arg(m_tracker.get_framecounter()) ,font);
+
+    QString nb_marqueurs = QString("nombre de marqueurs détectés et suivis %1").arg(m_tracker.get_num_marker());
+
+    //std::cout << m_tracker.get_num_marker() << std::endl;
+    this->drawText(10,60,nb_marqueurs,font);
 }
 
 
