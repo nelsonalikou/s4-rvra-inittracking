@@ -8,6 +8,7 @@
 
 #include <iostream>
 
+#include <QTabWidget>
 
 #define DEFAULTREADINGPORT 5000
 
@@ -45,7 +46,7 @@ void Viewer::closeEvent(QCloseEvent *event)
     gluDeleteQuadric( ToolsMarker::quad );
 
     //// TODO - Ménage
-
+    this->helpWidget()->close();
 }
 
 
