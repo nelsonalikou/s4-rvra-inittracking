@@ -300,6 +300,24 @@ void Viewer::drawInfo       ()
 //// TODO - Dessins des marqueurs détectés
 void Viewer::drawMarkers    ()
 {
+    for(int pos =0; pos < m_tracker.get_num_marker(); pos++){
+        dtrack_marker_type mt = m_tracker.get_marker(pos);
+        ARTMarker marker(mt.id,qglviewer::Vec(mt.loc),Qt::blue);
+        marker.draw();
+    }
+
+    for(int pos =0; pos < m_tracker.get_num_body(); pos++){
+        dtrack_body_type bt = m_tracker.get_body(pos);
+        ARTBody body_marker(bt.id,qglviewer::Vec(bt.loc),Qt::yellow, qglviewer::Quaternion());
+        body_marker.draw();
+    }
+
+    for(int pos =0; pos < m_tracker.get_num_flystick(); pos++){
+        dtrack_flystick_type ft = m_tracker.get_flystick(pos);
+        ARTFlystick flystick_marker(ft.id,qglviewer::Vec(ft.loc),Qt::green, qglviewer::Quaternion());
+        flystick_marker.draw();
+    }
+
 }
 
 // Ne pas modifier cette méthode

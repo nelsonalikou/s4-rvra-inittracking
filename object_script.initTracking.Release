@@ -1,0 +1,10 @@
+obj/main.o
+obj/ARTBody.o
+obj/ARTFlystick.o
+obj/ARTMarker.o
+obj/ViewerInterface.o
+obj/Viewer.o
+obj/ToolsMarker.o
+obj/DTrack.o
+obj/moc_ViewerInterface.o
+obj/moc_Viewer.o

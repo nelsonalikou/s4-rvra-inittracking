@@ -11,6 +11,9 @@
 #include <QMap>
 
 #include "ToolsMarker.h"
+#include "ARTMarker.h"
+#include "ARTBody.h"
+#include "ARTFlystick.h"
 
 /*!
  * \brief The Viewer class, classe permettant une visualisation avec OpenGL
@@ -85,6 +88,9 @@ private :
  //// TODO - autres Attributs pour le tracking
     //Instance pour le tracking
        DTrack      m_tracker;
+       QVector<ARTMarker> m_markers;
+       QVector<ARTBody> m_bodies;
+       QVector<ARTFlystick> m_flysticks ;
 
 };
 

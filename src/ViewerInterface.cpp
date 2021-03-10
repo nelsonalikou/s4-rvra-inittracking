@@ -28,8 +28,8 @@ ViewerInterface::ViewerInterface()
     connect( quitButton,         SIGNAL(pressed(void)), this, SLOT(close()) );
 
     //Mise en place de la connexion pour le bouton pause
-    connect( pauseButton,         SIGNAL(toggled(bool)), viewer, SLOT(readARTData()) );
-
+    connect( pauseButton,         SIGNAL(toggled(bool)), viewer, SLOT(pause(bool)) );
+    //SIGNAL(toggled(bool))
 
 // ---------------  Ne pas modifier ce code
    viewer->show();
